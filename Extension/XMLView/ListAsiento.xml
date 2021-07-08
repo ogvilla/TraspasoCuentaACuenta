@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+    This file is part of TraspasoCuentaACuenta plugin for FacturaScripts.
+    FacturaScripts  Copyright (C) 2015-2021 Carlos Garcia Gomez <carlos@facturascripts.com>
+    TraspasoCuentaACuenta  Copyright (C) 2021 Oscar G. Villa González <ogvilla@gmail.com>
+
+    Document   : ListAsiento.xml
+    Author     : Oscar G. Villa González   <ogvilla@gmail.com>
+    Description:
+        Add Modal to basic structure of ListAsiento.        
+-->
+<view>
+    <modals>
+        <group name="transfer-movements" title="transfer-movements-account-to-account" icon="fas fa-exchange-alt" >
+            <column name="journal" numcolumns="12" order="90">
+                <widget type="select" fieldname="iddiario">
+                    <values source="diarios" fieldcode="iddiario" fieldtitle="descripcion" />
+                </widget>
+            </column>
+            <column name="origin-account" numcolumns="12" order="100">
+                <widget type="autocomplete" fieldname="originaccount" required="true">
+                    <values source="subcuentas" fieldcode="codsubcuenta" fieldtitle="descripcion" />
+                </widget>
+            </column>
+            <column name="destiny-account" numcolumns="12" order="110">
+                <widget type="autocomplete" fieldname="destinyaccount" required="true" >
+                    <values source="subcuentas" fieldcode="codsubcuenta" fieldtitle="descripcion" />
+                </widget>
+            </column>
+            <column name="from-date" title="initial-accounting-date" numcolumns="12" order="200">
+                <widget type="date" fieldname="startdate" required="true" />
+            </column>
+            <column name="until-date" title="final-accounting-date" numcolumns="12" order="220">
+                <widget type="date" fieldname="enddate" required="true" />
+            </column>
+        </group>
+    </modals>
+</view>
