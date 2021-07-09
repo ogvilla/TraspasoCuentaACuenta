@@ -45,7 +45,7 @@ class ListAsiento
             if($action !== 'transfer-movements') {
                 return true;
             }
-
+            
             $params = $this->request->request->all();
             if (empty($params)) {
                 return true;
@@ -66,6 +66,8 @@ class ListAsiento
             $this->transferMovements($data, $params['destinyaccount'], $params['originaccount']);
 
             // añadir un mensaje de éxito
+            $this->toolBox()->i18nLog()->notice('account-to-account-transfer-correctly');
+            // y un mensaje de error
             // revisar como afecta al libro de facturas de iva por si hay que hacer algo                        
         };
     }
@@ -126,9 +128,10 @@ class ListAsiento
                         $untilDate->widget->setCustomValue($exercise->fechafin);
                     }
                     // esto no funciona porque el widget está en un modal
-            }
+                   
             
-        };
+            }
         
-    } */
+        };
+    }  */
 }
