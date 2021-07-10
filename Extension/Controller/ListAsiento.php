@@ -120,15 +120,20 @@ class ListAsiento
                     $codeExercise = $this->getViewModelValue($viewName, 'codejercicio');
                     $exercise = new \FacturaScripts\Dinamic\Model\Ejercicio();
                     $exercise->loadFromCode($codeExercise);
-                    $fromDate = $view->columnModalForName('from-date');
+
+                    $model = $this->views[$viewName]->model;
+                    $model->startdate = $exercise->fechainicio;
+                    $model->enddate = $exercise->fechafin;
+                    /* $fromDate = $view->columnModalForName('from-date');
                     if ($fromDate) {
                         $fromDate->widget->setCustomValue($exercise->fechainicio);
                     }                    
                     $untilDate = $view->columnModalForName('until-date');
                     if ($untilDate) {
                         $untilDate->widget->setCustomValue($exercise->fechafin);
-                    }
+                    } */
             }        
         };
+
     }
 }
