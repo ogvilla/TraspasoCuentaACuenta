@@ -42,10 +42,11 @@ class ListAsiento
     protected function execPreviousAction()
     {
         return function($action) {
+            
             if($action !== 'transfer-movements') {
                 return true;
             }
-            
+                     
             $params = $this->request->request->all();
             if (empty($params)) {
                 return true;
@@ -65,7 +66,7 @@ class ListAsiento
             $data = $this->dataBase->select($sql);
             $this->transferMovements($data, $params['destinyaccount'], $params['originaccount']);
 
-            // añadir un mensaje de éxito
+            // añadir un mensaje de éxito si tranferMovements es true
             $this->toolBox()->i18nLog()->notice('account-to-account-transfer-correctly');
             // y un mensaje de error
             // revisar como afecta al libro de facturas de iva por si hay que hacer algo                        
@@ -111,7 +112,7 @@ class ListAsiento
         }; 
     }
 
-    /* protected function loadData()
+    protected function loadData()
     {
         return function ($viewName, $view) {
             switch ($viewName) {
@@ -119,19 +120,15 @@ class ListAsiento
                     $codeExercise = $this->getViewModelValue($viewName, 'codejercicio');
                     $exercise = new \FacturaScripts\Dinamic\Model\Ejercicio();
                     $exercise->loadFromCode($codeExercise);
-                    $fromDate = $this->views[$viewName]->columnModalForName('from-date');                                      
+                    $fromDate = $view->columnModalForName('from-date');
                     if ($fromDate) {
-                        $fromDate->widget->setCustomValue($exercise->fechainicio);                                            
-                    }
-                    $untilDate = $this->views[$viewName]->columnModalForName('until-date');
+                        $fromDate->widget->setCustomValue($exercise->fechainicio);
+                    }                    
+                    $untilDate = $view->columnModalForName('until-date');
                     if ($untilDate) {
                         $untilDate->widget->setCustomValue($exercise->fechafin);
                     }
-                    // esto no funciona porque el widget está en un modal
-                   
-            
-            }
-        
+            }        
         };
-    }  */
+    }
 }
